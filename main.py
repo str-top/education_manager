@@ -5,14 +5,19 @@
 
 import threading
 import time
- 
-# имя, пол, курс, возраст, группа, форма обучения
-students = {"Богдан":["м", 8, 18, "python41", "очно", "учится", "должен денег"]}
+
+# имя, пол, курс, возраст, группа, форма обучения, текущий статус, должен ли денег
+students = {"Богдан": ["м", 8, 18, "python41", "очно", "учится", "должен денег"]}
 students["Игнат"] = ["м", 1, 58, "вторая", "очно", "учится", "должен денег"]
-grades = [["Богдан", "19:11", 5]]
+students["Иван"] = ["м", 3, 8, "вторая", "очно", "учится", "не должен денег"]
+students["Агнесса"] = ["ж", 4, 5, "вторая", "очно", "учится", "не должен денег"]
+grades = [["Богдан", "19:11", 5], ["Игнат", "19:11", 2], ["Богдан", "19:11", 4], ["Игнат", "19:11", 3]]
+grades.append(["Иван", "19:11", 5])
+grades.append(["Агнесса", "19:11", 4])
 
 lesson_time = 60
 break_time = 15
+
 
 def add_student():
     global students
@@ -26,8 +31,9 @@ def add_student():
     dont_pay = input(f'укажите, есть ли долг по оплате')
 
     students[name] = [gender, level, age, group, form, status, dont_pay]
-    
+
     print(students)
+
 
 def del_student():
     global students
@@ -39,6 +45,7 @@ def del_student():
         print(students)
     else:
         print('Такого студента не существует')
+
 
 def new_grade():
     while True:
@@ -52,14 +59,23 @@ def new_grade():
         else:
             print(f"Студент с именем {student_name} не найден.")
 
+
 def dont_pay():
     print("Должники: ")
     for student in students:
         if students[student][6] == "должен денег":
             print(student)
 
+
 def student_data():
-    pass
+    global students
+    name = input('Данные какого студента вывести? ')
+    if name in students:
+        print(f"Имя   пол   курс   возраст   группа   форма обучения   текущий статус   должен ли денег")
+        print(name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4], students[name][5], students[name][6])
+    else:
+        print('Такого студента не существует')
+
 
 def show_groups():
     group = input("Введите название группы: ")
@@ -68,8 +84,31 @@ def show_groups():
         if students[student][3] == group:
             print(student)
 
+
 def top_students():
-    pass
+    # 1) берем данные из списка оценок
+    students_grades = {}
+
+    # 2) соотносим оценки к студентам
+    for grade in grades:
+        if grade[0] in students_grades:
+            students_grades[grade[0]].append(grade[2])
+        else:
+            students_grades[grade[0]] = [grade[2]]
+
+    # 3) высчитываем средний балл
+    avg_grades = {}
+    for student_grades in students_grades:
+        avg_grades[student_grades] = sum(students_grades[student_grades]) / len(students_grades[student_grades])
+
+    # 4) сортируем по убыванию
+    sorted_dict = dict(sorted(avg_grades.items(), key=lambda x: x[1], reverse=True))
+
+    # 5) выводим первых трех студентов
+    top_students = list(sorted_dict.items())[:3]
+    for top_student in top_students:
+        print(top_student[0])
+
 
 def loop_task():
     while True:
@@ -77,21 +116,22 @@ def loop_task():
 
         # TODO: обработка данных
 
+
 def user_input_task():
     while True:
         pass
-        
+
         menu = """Список действий:
 1) добавить студента
 2) удалить студента
 3) добавить оценку
 4) вывести список неплательщиков
-5)*просмотр данных студента
+5) просмотр данных студента
 6) просмотреть состав группы
-7)*топ 3 студента
+7) топ 3 студента
 
 Введите цифру действия: """
-        
+
         # выбор действия
         selection = input(menu)
 
@@ -112,12 +152,13 @@ def user_input_task():
             top_students()
         else:
             print("Такого действия в списке нет")
-        
+
         time.sleep(1)
         print("")
 
         # - просмотр данных студента
         # - вывести топ 3 студента
+
 
 # Run loop in a separate thread
 thread = threading.Thread(target=loop_task, daemon=True)
