@@ -34,22 +34,34 @@ def just_for_fun():
     print(face)
 
 def add_student():
-    global students
-    name = input('Введи имя нового студента')
-    gender = input('Пол студента:"м","ж"')
-    level = int(input('введите курс студента'))
-    age = int(input('введите возраст студента'))
-    group = input('Введите группу студента')
-    form = input('Введите форму обучения студента')
-    status = input(f'Введите статус студента \n обучается, отчислен или закончил обучение')
-    dont_pay = input(f'укажите, есть ли долг по оплате')
-
-    students[name] = [gender, level, age, group, form, status, dont_pay]
-
-    print(students)
-
-    just_for_fun()
-
+    try:
+        name = input('Введи имя нового студента: ')
+        if name in students:
+            print("такой студент уже есть. ")
+        
+        gender = input('Пол студента ("м", "ж"): ')
+                if gender not in ['м', 'ж']:
+                    raise ValueError("Пол должен быть 'м' или 'ж'.")
+                    
+        level = int(input('Введите курс студента: '))
+        if level < 1:
+            raise ValueError("курс должен быть положительным. ")
+            info.append(level)
+    
+        age = int(input('Введите возраст студента: '))
+        if age < 0:
+            raise ValueError("возраст не может быть отрицательым")
+            info.append(age)
+    
+        group = input('Введите группу студента: ')
+        form = input('Введите форму обучения студента: ')
+        status = input('Введите статус студента (обучается, отчислен или закончил обучение): ')
+        dont_pay = input('Укажите, есть ли долг по оплате (да/нет): ')
+        if dont_pay not in ['да', 'нет']:
+            raise ValueError("Ответ должен быть 'да' или 'нет'.")
+    
+    students[name] = info
+    print(f'Студент {name} добавлен.')
 def del_student(age = 18, level = 1):
     global students
     name = input('Какого студента удаляем? ')
