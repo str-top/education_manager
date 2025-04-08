@@ -18,6 +18,20 @@ grades.append(["Агнесса", "19:11", 4])
 lesson_time = 60
 break_time = 15
 
+def just_for_fun():
+    face = """
+   _________
+  /         \
+ |  O     O  |
+ |     ^     |
+ |   \___/   |
+ |           |
+ |  \_____/  |
+  \_________/
+     |   |
+     ----- 
+    """
+    print(face)
 
 def add_student():
     global students
@@ -34,6 +48,7 @@ def add_student():
 
     print(students)
 
+    just_for_fun()
 
 def del_student():
     global students
