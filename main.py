@@ -52,11 +52,10 @@ def add_student():
 
 def del_student():
     global students
-    name = input('какого студента удаляем? ')
+    name = input('Какого студента удаляем? ')
     if name in students:
-        students = list(students)
-        students.remove(deleted_name)
-        students = dict(students)
+        students.pop(name)
+        print(f"Студент {name} удален.")
         print(students)
     else:
         print('Такого студента не существует')
