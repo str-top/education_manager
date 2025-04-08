@@ -85,8 +85,10 @@ def student_data():
     global students
     name = input('Данные какого студента вывести? ')
     if name in students:
+        new_name = name.upper()
+        obr_mame = new_name[::-2]
         print(f"Имя   пол   курс   возраст   группа   форма обучения   текущий статус   должен ли денег")
-        print(name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4], students[name][5], students[name][6])
+        print(obr_name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4], students[name][5], students[name][6])
     else:
         print('Такого студента не существует')
 
