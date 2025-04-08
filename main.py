@@ -50,7 +50,7 @@ def add_student():
 
     just_for_fun()
 
-def del_student():
+def del_student(age = 18, level = 1):
     global students
     name = input('Какого студента удаляем? ')
     if name in students:
@@ -155,7 +155,7 @@ def user_input_task():
         if selection == "1":
             add_student()
         elif selection == "2":
-            del_student()
+            del_student(age = 19, level = 2)
         elif selection == "3":
             new_grade()
         elif selection == "4":
