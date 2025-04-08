@@ -67,6 +67,9 @@ def new_grade():
         if student_name in students:
             time_of_grade = input("Введите время получения оценки через двоеточие: ")
             grade_number = input("Введите оценку: ")
+
+             # TODO
+            
             grades.append([student_name, time_of_grade, grade_number])
             print(f"Оценка {grade_number} для студента {student_name} добавлена")
             break
