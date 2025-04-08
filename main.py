@@ -31,8 +31,8 @@ def add_student():
 
 def del_student():
     global students
-    deleted_name = input('какого студента удаляем? ')
-    if deleted_name in students:
+    name = input('какого студента удаляем? ')
+    if name in students:
         students = list(students)
         students.remove(deleted_name)
         students = dict(students)
