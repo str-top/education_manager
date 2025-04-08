@@ -151,7 +151,6 @@ def loop_task():
 def user_input_task():
     while True:
         pass
-
         menu = """Список действий:
 1) добавить студента
 2) удалить студента
@@ -163,26 +162,30 @@ def user_input_task():
 
 Введите цифру действия: """
 
-        # выбор действия
-        selection = input(menu)
-
-        # обработка пользовательского взаимодействия
-        if selection == "1":
-            add_student()
-        elif selection == "2":
-            del_student(age = 19, level = 2)
-        elif selection == "3":
-            new_grade()
-        elif selection == "4":
-            dont_pay()
-        elif selection == "5":
-            student_data()
-        elif selection == "6":
-            show_groups()
-        elif selection == "7":
-            top_students()
-        else:
-            print("Такого действия в списке нет")
+selection = input(menu).strip()
+        
+ try:
+    assert selection in ["1", "2", "3", "4", "5", "6", "7"], "Неверный номер действия"
+            
+            if selection == "1":
+                add_student()
+            elif selection == "2":
+                del_student()
+            elif selection == "3":
+                new_grade()
+            elif selection == "4":
+                dont_pay()
+            elif selection == "5":
+                student_data()
+            elif selection == "6":
+                show_groups()
+            elif selection == "7":
+                top_students()
+                
+        except AssertionError as e:
+            print(f"Ошибка: {e}")
+        except Exception as e:
+            print(f"Произошла ошибка: {e}")
 
         time.sleep(1)
         print("")
