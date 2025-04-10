@@ -10,11 +10,11 @@ students = {}
 grades = []
 
 def students_list():
-                # имя, пол, курс, возраст, группа, форма обучения, текущий статус, должен ли денег
-    students["Богдан"] = ["м", 8, 18, "python41", "очно", "учится", "должен денег"]
-    students["Игнат"] = ["м", 1, 58, "вторая", "очно", "учится", "должен денег"]
-    students["Иван"] = ["м", 3, 8, "вторая", "очно", "учится", "не должен денег"]
-    students["Агнесса"] = ["ж", 4, 5, "вторая", "очно", "учится", "не должен денег"]
+    # имя, пол, курс, возраст, группа, текущий статус, форма обучения, должен ли денег
+    students = {"Богдан": ["м", 8, 18, "python41", "учится", "очно", "должен денег"]}
+    students["Игнат"] = ["м", 1, 58, "вторая", "учится", "очно", "должен денег"]
+    students["Иван"] = ["м", 3, 8, "вторая", "учится", "очно", "не должен денег"]
+    students["Агнесса"] = ["ж", 4, 5, "вторая", "учится", "очно", "не должен денег"]
     grades.append(["Богдан", "19:11", 5])
     grades.append(["Игнат", "19:11", 2])
     grades.append(["Богдан", "19:11", 4])
@@ -72,7 +72,7 @@ def add_student():
             if dont_pay not in ['да', 'нет']:
                 raise ValueError("Ответ должен быть 'да' или 'нет'.")
 
-            students[name] = [gender, level, age, group, form, status, dont_pay]
+            students[name] = [gender, level, age, form, group, status, dont_pay]
             print(f'Студент {name} добавлен.')
             just_for_fun()
             break
@@ -122,7 +122,7 @@ def student_data():
     if name in students:
         new_name = name.upper()
         obr_name = new_name[::-2]
-        print(f"Имя   пол   курс   возраст   группа   форма обучения   текущий статус   должен ли денег")
+        print(f"Имя   пол   курс   возраст   группа    текущий статус   форма обучения  должен ли денег")
         print(obr_name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4],
               students[name][5], students[name][6])
     else:
