@@ -94,19 +94,29 @@ def del_student(age=18, level=1):
 
 
 def new_grade():
+    def new_grade():
     while True:
         student_name = input("Введите имя студента: ")
         if student_name in students:
-            time_of_grade = input("Введите время получения оценки через двоеточие: ")  # 10:24
-            grade_number = input("Введите оценку: ")  # 1 2 3 4 5
-
-            # TODO
-
-            grades.append([student_name, time_of_grade, grade_number])
-            print(f"Оценка {grade_number} для студента {student_name} добавлена")
-            break
-        else:
-            print(f"Студент с именем {student_name} не найден.")
+            print(f"Студент {student_name} не найден")
+            continue
+        while True:
+            time_of_grade = input("Введите время получения оценки в формате ЧЧ:ММ (пример - 21:05)")
+            if len(time_of_grade) == 5 and time_of_grade[2] == ':' 
+                time_of_grade[:2].isdigit() and time_of_grade[3:].isdigit():
+                hours, minutes = int(time_of_grade[:2]), int(time_of_grade[3:])
+                if 0 <= hours < 24 and <= minutes <60:
+                    break
+                print("Ошибка! Введите время в формате ЧЧ:ММ (пример - 21:05)")
+        while True:
+            grsde_number = input("Введите оценку от 1 до 5: ")
+            if grsde_number in {'1', '2', '3', '4', '5'}:
+                grsde_number = int(grsde_number)
+                break
+            print("Ошибка! Оценка должна быть цифрой от 1 до 5")
+        grades.append([student_name, time_of_grade, grsde_number])
+        print("Оценка {grade_number} для {student_name} добавлена в {time_of_grade}")
+        break
 
 
 def dont_pay():
