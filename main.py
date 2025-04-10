@@ -6,6 +6,9 @@ import random
 import threading
 import time
 
+students = {}
+grades = []
+
 def students_list():
                 # имя, пол, курс, возраст, группа, форма обучения, текущий статус, должен ли денег
     students["Богдан"] = ["м", 8, 18, "python41", "очно", "учится", "должен денег"]
