@@ -139,6 +139,12 @@ def show_groups():
         if students[student][3] == group:
             print(student)
 
+def calculate_avg_grades(students_grades):
+    avg_grades = []
+    FOR student in student_grades.items():
+        if grades:
+            avd_grades = sun(grades) / len(grades)
+    return avg_grades
 
 def top_students():
     # 1) берем данные из списка оценок
@@ -152,9 +158,7 @@ def top_students():
             students_grades[grade[0]] = [grade[2]]
 
     # 3) высчитываем средний балл
-    avg_grades = {}
-    for student_grades in students_grades:
-        avg_grades[student_grades] = sum(students_grades[student_grades]) / len(students_grades[student_grades])
+   avg_grades = calculate_average_grades(students_grades)
 
     # 4) сортируем по убыванию
     sorted_dict = dict(sorted(avg_grades.items(), key=lambda x: x[1], reverse=True))
