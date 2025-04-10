@@ -34,34 +34,40 @@ def just_for_fun():
     print(face)
 
 def add_student():
-    try:
-        name = input('Введи имя нового студента: ')
-        if name in students:
-            print("такой студент уже есть. ")
+    while True:
+        try:
+            name = input('Введи имя нового студента: ')
+            if name in students:
+                print("такой студент уже есть. ")
+            
+            gender = input('Пол студента ("м", "ж"): ')
+            if gender not in ['м', 'ж']:
+                raise ValueError("Пол должен быть 'м' или 'ж'.")
+                        
+            level = int(input('Введите курс студента: '))
+            if level < 1:
+                raise ValueError("курс должен быть положительным. ")
         
-        gender = input('Пол студента ("м", "ж"): ')
-                if gender not in ['м', 'ж']:
-                    raise ValueError("Пол должен быть 'м' или 'ж'.")
-                    
-        level = int(input('Введите курс студента: '))
-        if level < 1:
-            raise ValueError("курс должен быть положительным. ")
-            info.append(level)
-    
-        age = int(input('Введите возраст студента: '))
-        if age < 0:
-            raise ValueError("возраст не может быть отрицательым")
-            info.append(age)
-    
-        group = input('Введите группу студента: ')
-        form = input('Введите форму обучения студента: ')
-        status = input('Введите статус студента (обучается, отчислен или закончил обучение): ')
-        dont_pay = input('Укажите, есть ли долг по оплате (да/нет): ')
-        if dont_pay not in ['да', 'нет']:
-            raise ValueError("Ответ должен быть 'да' или 'нет'.")
-    
-    students[name] = info
-    print(f'Студент {name} добавлен.')
+            age = int(input('Введите возраст студента: '))
+            if age < 0:
+                raise ValueError("возраст не может быть отрицательым")
+        
+            group = input('Введите группу студента: ')
+            form = input('Введите форму обучения студента: ')
+            status = input('Введите статус студента (обучается, отчислен или закончил обучение): ')
+            dont_pay = input('Укажите, есть ли долг по оплате (да/нет): ')
+            
+            if dont_pay not in ['да', 'нет']:
+                raise ValueError("Ответ должен быть 'да' или 'нет'.")
+        
+            students[name] = [gender, level, age, group, form, status, dont_pay]
+            print(f'Студент {name} добавлен.')
+            break
+
+        except Exception as e:
+            print('Ошибка', e)
+
+
 def del_student(age = 18, level = 1):
     global students
     name = input('Какого студента удаляем? ')
@@ -71,7 +77,6 @@ def del_student(age = 18, level = 1):
         print(students)
     else:
         print('Такого студента не существует')
-
 
 def new_grade():
     while True:
@@ -103,7 +108,7 @@ def student_data():
         new_name = name.upper()
         obr_mame = new_name[::-2]
         print(f"Имя   пол   курс   возраст   группа   форма обучения   текущий статус   должен ли денег")
-        print(obr_name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4], students[name][5], students[name][6])
+        print(name, students[name][0], students[name][1], students[name][2], students[name][3], students[name][4], students[name][5], students[name][6])
     else:
         print('Такого студента не существует')
 
@@ -162,11 +167,10 @@ def user_input_task():
 
 Введите цифру действия: """
 
-selection = input(menu).strip()
+        selection = input(menu).strip()
         
- try:
-    assert selection in ["1", "2", "3", "4", "5", "6", "7"], "Неверный номер действия"
-            
+        assert selection in ["1", "2", "3", "4", "5", "6", "7"], "Неверный номер действия"
+        try:    
             if selection == "1":
                 add_student()
             elif selection == "2":
