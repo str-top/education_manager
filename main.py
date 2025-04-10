@@ -87,7 +87,10 @@ def del_student_2(name):
 
 def del_student(age=18, level=1):
     global students
-    name = input('Какого студента удаляем? ')
+    while True:
+        if not students:
+            print("Список студентов пуст. Невозможно удалить студента.")
+            break
     if name in students:
         del_student_2(name)
     else:
