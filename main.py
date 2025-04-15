@@ -10,6 +10,8 @@ students = {}
 grades = []
 
 def students_list():
+    global students
+    global grades
     students = {"Богдан": ["м", 8, 18, "python41", "очно", "учится", "должен денег"]}
     students["Игнат"] = ["м", 1, 58, "вторая", "очно", "учится", "должен денег"]
     students["Иван"] = ["м", 3, 8, "вторая", "очно", "учится", "не должен денег"]
@@ -18,12 +20,13 @@ def students_list():
     grades.append(["Иван", "19:11", 3])
     grades.append(["Агнесса", "19:11", 5])
     grades.append(["Агнесса", "19:12", 5])
-    lesson_time = 3
-    break_time = 1
 
 current_status = ""
 last_change_time = time.time()
 last_deadline_check_time = time.time()
+
+lesson_time = 3
+break_time = 1
 
 def just_for_fun():
     face = r"""
@@ -94,7 +97,6 @@ def del_student(age=18, level=1):
 
 
 def new_grade():
-    def new_grade():
     while True:
         student_name = input("Введите имя студента: ")
         if student_name in students:
@@ -102,10 +104,9 @@ def new_grade():
             continue
         while True:
             time_of_grade = input("Введите время получения оценки в формате ЧЧ:ММ (пример - 21:05)")
-            if len(time_of_grade) == 5 and time_of_grade[2] == ':' 
-                time_of_grade[:2].isdigit() and time_of_grade[3:].isdigit():
+            if len(time_of_grade) == 5 and time_of_grade[2] == ':' and time_of_grade[:2].isdigit() and time_of_grade[3:].isdigit():
                 hours, minutes = int(time_of_grade[:2]), int(time_of_grade[3:])
-                if 0 <= hours < 24 and <= minutes <60:
+                if 0 <= hours < 24 and 0 <= minutes < 60:
                     break
                 print("Ошибка! Введите время в формате ЧЧ:ММ (пример - 21:05)")
         while True:
@@ -147,7 +148,7 @@ def show_groups():
 
 def calculate_avg_grades(students_grades):
     avg_grades = []
-    FOR student in student_grades.items():
+    for student in students_grades.items():
         if grades:
             avd_grades = sun(grades) / len(grades)
     return avg_grades
@@ -164,7 +165,7 @@ def top_students():
             students_grades[grade[0]] = [grade[2]]
 
     # 3) высчитываем средний балл
-   avg_grades = calculate_average_grades(students_grades)
+    avg_grades = calculate_avg_grades(students_grades)
 
     # 4) сортируем по убыванию
     sorted_dict = dict(sorted(avg_grades.items(), key=lambda x: x[1], reverse=True))
@@ -250,6 +251,8 @@ def user_input_task():
 7) топ 3 студента
 
 Введите цифру действия: """
+
+        top_students()
 
         selection = input(menu).strip()
 
